@@ -17,11 +17,13 @@
       <div>
         <van-grid :gutter="10" :border="false">
           <van-grid-item>
-            <van-image src="@/assets/wechart.png" round />
+            <van-image
+              src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1599039878&di=dc22ed909baf8dd7a3ec7fc8dbfec147&src=http://bpic.588ku.com/element_origin_min_pic/00/91/37/6356f169181803b.jpg"
+              height="50px"
+              width="50px"
+              round
+            />
           </van-grid-item>
-          <!-- <van-grid-item>
-            <van-image src="https://img.yzcdn.cn/vant/apple-1.jpg" round fit="cover" />
-          </van-grid-item>-->
         </van-grid>
       </div>
     </div>
@@ -79,6 +81,7 @@ export default {
       margin: 0 10px;
       width: calc(100% - 20px);
     }
+
     .field-title {
       font-size: 16px;
       font-weight: bold;
@@ -90,6 +93,7 @@ export default {
   }
   .bottom {
     text-align: center;
+    padding: 0 40px;
     .bottom-title {
       height: 12px;
       font-size: 12px;
@@ -97,6 +101,9 @@ export default {
       font-weight: 500;
       color: #888888;
       line-height: 24px;
+    }
+    /deep/.van-grid-item__content {
+      background-color: transparent;
     }
   }
 }
