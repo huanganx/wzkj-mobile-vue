@@ -31,12 +31,12 @@
 </template>
 
 <script>
-import { Field, Button, Grid, GridItem, Image } from "vant";
+import { Field, Button, Grid, GridItem, Image } from 'vant'
 export default {
   data() {
     return {
-      value: "",
-    };
+      value: '',
+    }
   },
   components: {
     [Field.name]: Field,
@@ -45,11 +45,12 @@ export default {
     [GridItem.name]: GridItem,
     [Image.name]: Image,
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
 .home {
+  font-family: PingFang SC;
   width: 100%;
   height: 600px;
   display: flex;
@@ -62,7 +63,6 @@ export default {
     line-height: 28px;
     height: 28px;
     font-size: 28px;
-    font-family: PingFang SC;
     font-weight: 500;
     color: #197df8;
   }
@@ -86,7 +86,6 @@ export default {
       font-size: 16px;
       font-weight: bold;
       padding: 0 15px;
-      font-family: PingFang SC;
       font-weight: 500;
       color: #222222;
     }
@@ -97,7 +96,6 @@ export default {
     .bottom-title {
       height: 12px;
       font-size: 12px;
-      font-family: PingFang SC;
       font-weight: 500;
       color: #888888;
       line-height: 24px;
