@@ -4,6 +4,10 @@ import router from './router'
 import store from './store'
 import 'amfe-flexible'
 import 'vant/lib/index.css'
+import { Lazyload } from 'vant'
+Vue.use(Lazyload, {
+  lazyComponent: true
+})
 
 Vue.config.productionTip = false
 new Vue({
