@@ -20,7 +20,7 @@
       />
     </van-cell>
     <van-cell-group>
-      <van-cell title="分享给朋友" is-link>
+      <van-cell title="分享给朋友" is-link @click="showShare=true">
         <template #icon>
           <van-image
             width="24px"
@@ -30,7 +30,7 @@
           />
         </template>
       </van-cell>
-      <van-cell title="帮助中心" is-link>
+      <van-cell title="帮助中心" is-link @click="handlerHelp">
         <template #icon>
           <van-image
             width="24px"
@@ -42,7 +42,7 @@
       </van-cell>
     </van-cell-group>
     <van-cell-group>
-      <van-cell title="我的红包" is-link>
+      <van-cell title="我的红包" is-link @click="handlerRedBag">
         <template #icon>
           <van-image
             width="24px"
@@ -52,7 +52,7 @@
           />
         </template>
       </van-cell>
-      <van-cell title="我的文件" is-link>
+      <van-cell title="我的文件" is-link @click="handlerFile">
         <template #icon>
           <van-image
             width="24px"
@@ -62,7 +62,7 @@
           />
         </template>
       </van-cell>
-      <van-cell title="我的收藏" is-link>
+      <van-cell title="我的收藏" is-link @click="handlerCollection">
         <template #icon>
           <van-image
             width="24px"
@@ -72,7 +72,7 @@
           />
         </template>
       </van-cell>
-      <van-cell title="我的订单" is-link>
+      <van-cell title="我的订单" is-link @click="handlerOrder">
         <template #icon>
           <van-image
             width="24px"
@@ -84,7 +84,7 @@
       </van-cell>
     </van-cell-group>
     <van-cell-group>
-      <van-cell title="设置" is-link>
+      <van-cell title="设置" is-link  @click="handlerSet">
         <template #icon>
           <van-image
             width="24px"
@@ -95,17 +95,55 @@
         </template>
       </van-cell>
     </van-cell-group>
+    <van-share-sheet v-model="showShare" title="立即分享给好友" :options="options" @select="onSelect" />
   </div>
 </template>
 
 <script>
-import { Cell, CellGroup, Icon, Image } from 'vant'
+import { Cell, CellGroup, Icon, Image, ShareSheet, Toast } from 'vant'
 export default {
   components: {
     [CellGroup.name]: CellGroup,
     [Cell.name]: Cell,
     [Icon.name]: Icon,
-    [Image.name]: Image
+    [Image.name]: Image,
+    [ShareSheet.name]: ShareSheet
+  },
+  data() {
+    return {
+      showShare: false,
+      options: [
+        { name: '微信', icon: 'wechat' },
+        { name: '微博', icon: 'weibo' },
+        { name: '复制链接', icon: 'link' },
+        { name: '分享海报', icon: 'poster' },
+        { name: '二维码', icon: 'qrcode' }
+      ]
+    }
+  },
+  methods: {
+    handlerHelp(){
+      console.log('帮助');
+    },
+    handlerRedBag(){
+      console.log('红包');
+    },
+    handlerFile(){
+      console.log('文件');
+    },
+    handlerCollection(){
+      console.log('收藏');
+    },
+    handlerOrder(){
+      console.log('订单');
+    },
+    handlerSet(){
+      console.log('设置');
+    },
+    onSelect(option) {
+      Toast(option.name)
+      this.showShare = false
+    }
   }
 }
 </script>

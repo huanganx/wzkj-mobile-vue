@@ -10,8 +10,8 @@
     <div class="work">
       <h2 class="work-title">办公应用</h2>
       <van-divider />
-      <van-grid :border="false">
-        <van-grid-item v-for="item in workItemList" :key="item.id" :text="item.text" class="dd">
+      <van-grid :border="false" >
+        <van-grid-item v-for="item in workItemList" :key="item.id" :text="item.text" @click="handleGrid(item)">
           <template #icon>
             <van-image
               :src="item.icon"
@@ -30,7 +30,7 @@
       <h2 class="business-title">业务应用</h2>
       <van-divider />
       <van-grid :border="false">
-        <van-grid-item v-for="item in businessItemList" :key="item.id" :text="item.text">
+        <van-grid-item v-for="item in businessItemList" :key="item.id" :text="item.text" @click="handleGrid(item)">
           <template #icon>
             <van-image
               :src="item.icon"
@@ -178,6 +178,11 @@ export default {
           color: '#E63F96'
         }
       ]
+    }
+  },
+  methods:{
+    handleGrid(obj){
+      console.log('点击了'+obj.text);
     }
   }
 }

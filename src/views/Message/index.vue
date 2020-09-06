@@ -7,21 +7,27 @@
         </van-swipe-item>
       </van-swipe>
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <van-cell v-for="item in list" :key="item" :title="item" value="1小时前" label="描述信息">
-          <template #icon>
-            <van-icon
-              name="https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=251289958,1860898046&fm=26&gp=0.jpg"
-              badge="1"
-            />
+        <van-swipe-cell v-for="item in list" :key="item" right-width='100%'>
+          <van-cell :title="item" value="1小时前" label="描述信息" @click="handlerItem(item)">
+            <template #icon>
+              <van-icon
+                name="https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=251289958,1860898046&fm=26&gp=0.jpg"
+                badge="1"
+              />
+            </template>
+          </van-cell>
+          <template #right>
+            <van-button square color="#404040" text="标为已读" @click="handleRead(item)"/>
+            <van-button square type="danger" text="删除" @click="handleDel(item)"/>
           </template>
-        </van-cell>
+        </van-swipe-cell>
       </van-list>
     </van-pull-refresh>
   </div>
 </template>
 
 <script>
-import { List, PullRefresh, Cell, Swipe, SwipeItem, Icon, Image } from 'vant'
+import { List, PullRefresh, Cell, Swipe, SwipeItem, Icon, Image, SwipeCell,Button } from 'vant'
 export default {
   data() {
     return {
@@ -39,7 +45,9 @@ export default {
     [Cell.name]: Cell,
     [Icon.name]: Icon,
     [PullRefresh.name]: PullRefresh,
-    [Image.name]: Image
+    [Image.name]: Image,
+    [SwipeCell.name]: SwipeCell,
+    [Button.name]: Button,
   },
   methods: {
     onLoad() {
@@ -67,6 +75,15 @@ export default {
       // 将 loading 设置为 true，表示处于加载状态
       this.loading = true
       this.onLoad()
+    },
+    handleRead(item){
+      console.log('标为已读',item);
+    },
+    handleDel(item){
+      console.log('删除',item);
+    },
+    handlerItem(item){
+      console.log('打开',item);
     }
   }
 }
@@ -83,12 +100,12 @@ export default {
       height: 100%;
     }
   }
-  // .swipe {
-  //   height: 134px;
-    /deep/ .van-swipe-item {
-      background-color: #ffffff;
-      height: 134px;
-    }
-  // }
+  /deep/ .van-swipe-item {
+    background-color: #ffffff;
+    height: 134px;
+  }
+  /deep/ .van-button--square{
+    height: 100%;
+  }
 }
 </style>

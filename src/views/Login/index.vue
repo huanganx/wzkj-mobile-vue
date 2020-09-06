@@ -11,14 +11,14 @@
     </div>
     <div class="center">
       <div class="field-title">手机号</div>
-      <van-field v-model="value" placeholder="请输入手机号" :border="false" />
+      <van-field v-model="tel" placeholder="请输入手机号" :border="false" />
       <div class="field-title">验证码</div>
-      <van-field v-model="value" placeholder="请输入短信验证码" center clearable :border="false">
+      <van-field v-model="verify" placeholder="请输入短信验证码" center clearable :border="false">
         <template #button>
-          <van-button size="small" color="#FA7E05">发送验证码</van-button>
+          <van-button size="small" color="#FA7E05" @click="getVerify" :disabled="disabled">{{ btnText }}</van-button>
         </template>
       </van-field>
-      <van-button type="info" block>登 录</van-button>
+      <van-button type="info" block @click="handlerLogin">登 录</van-button>
     </div>
     <div class="bottom">
       <div class="bottom-title">——— 第三方登录 ———</div>
@@ -63,12 +63,16 @@
 </template>
 
 <script>
-import { Field, Button, Grid, GridItem, Image } from 'vant'
+import {mapMutations} from 'vuex'
+import { Field, Button, Grid, GridItem, Image, Toast } from 'vant'
 export default {
-  name:'Login',
+  name: 'Login',
   data() {
     return {
-      value: ''
+      tel: '',
+      verify: '',
+      totalCount: 0,
+      disabled: false
     }
   },
   components: {
@@ -77,6 +81,46 @@ export default {
     [Grid.name]: Grid,
     [GridItem.name]: GridItem,
     [Image.name]: Image
+  },
+  computed: {
+    btnText() {
+      return this.totalCount !== 0 ? `${this.totalCount}秒再次获取` : '获取验证码'
+    }
+  },
+  methods: {
+    ...mapMutations({
+      setAuthorToken: "user/setAuthorToken",
+    }),
+    handlerLogin() {
+      const _this = this
+      if (this.verify === '888888') {
+        setTimeout(() => {
+          const userToken = 'Bearer ' + 'token'
+          Toast('登陆成功')
+          _this.setAuthorToken({ Authorization: userToken })
+          _this.$router.push('/')
+        }, 1000)
+      } else {
+        Toast('验证码错误！')
+      }
+    },
+    getVerify() {
+      if (!this.tel || !/^1[3456789]\d{9}$/.test(this.tel)) {
+        Toast('手机号码有误！')
+        return
+      }
+      setTimeout(() => {
+        this.disabled = true
+        this.totalCount = 60
+        this.interval = setInterval(() => {
+          this.totalCount--
+          if (this.totalCount === 0) {
+            clearInterval(this.interval)
+            this.disabled = false
+          }
+        }, 1000)
+      }, 1000)
+    }
   }
 }
 </script>
@@ -100,7 +144,7 @@ export default {
     color: #197df8;
     display: flex;
     margin: 0 auto;
-    .top-title{
+    .top-title {
       line-height: 50px;
       height: 50px;
       margin-left: 5px;
@@ -134,7 +178,7 @@ export default {
   .bottom {
     text-align: center;
     padding: 0 30px;
-    box-sizing:border-box;
+    box-sizing: border-box;
     .bottom-title {
       height: 12px;
       font-size: 12px;

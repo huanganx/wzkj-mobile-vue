@@ -23,39 +23,36 @@
       </van-cell>
       <div v-for="index in indexList" :key="index">
         <van-index-anchor :index="index" />
-        <van-cell title="安宣" center>
-          <template #icon>
-            <van-image
-              width="38px"
-              height="38px"
-              src="https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=251289958,1860898046&fm=26&gp=0.jpg"
-              style="background-color:#B070FF;border-radius:3px"
-            />
+        <van-swipe-cell>
+          <van-cell title="安宣" center @click="hanlderItem">
+            <template #icon>
+              <van-image
+                width="38px"
+                height="38px"
+                src="https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=251289958,1860898046&fm=26&gp=0.jpg"
+                style="background-color:#B070FF;border-radius:3px"
+              />
+            </template>
+          </van-cell>
+          <template #right>
+            <van-button square color="#404040" text="备注" @click="handleRemark" />
           </template>
-        </van-cell>
-        <van-cell title="安宣" center>
-          <template #icon>
-            <van-image
-              width="38px"
-              height="38px"
-              src="https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=251289958,1860898046&fm=26&gp=0.jpg"
-              style="background-color:#B070FF;border-radius:3px"
-            />
-          </template>
-        </van-cell>
+        </van-swipe-cell>
       </div>
     </van-index-bar>
   </div>
 </template>
 
 <script>
-import { IndexBar, IndexAnchor, Cell, Image } from 'vant'
+import { IndexBar, IndexAnchor, Cell, Image, SwipeCell, Button } from 'vant'
 export default {
   components: {
     [IndexBar.name]: IndexBar,
     [IndexAnchor.name]: IndexAnchor,
     [Cell.name]: Cell,
-    [Image.name]: Image
+    [Image.name]: Image,
+    [SwipeCell.name]: SwipeCell,
+    [Button.name]: Button
   },
   data() {
     const indexList = []
@@ -66,6 +63,14 @@ export default {
     }
     return {
       indexList
+    }
+  },
+  methods: {
+    handleRemark() {
+      console.log('备注')
+    },
+    hanlderItem(){
+      console.log('打开');
     }
   }
 }
@@ -89,9 +94,12 @@ export default {
     font-size: 14px;
   }
   /deep/ .top-icon .van-image img {
-      border-radius: 0;
-      padding: 3px;
-      box-sizing: border-box;
-    }
+    border-radius: 0;
+    padding: 3px;
+    box-sizing: border-box;
+  }
+  /deep/ .van-button--square {
+    height: 100%;
+  }
 }
 </style>

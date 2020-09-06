@@ -1,4 +1,4 @@
-# vant-demo
+# wzkj-mobile-vue
 
 ## Project setup
 ```
