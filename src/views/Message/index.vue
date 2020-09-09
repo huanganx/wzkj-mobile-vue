@@ -7,7 +7,7 @@
         </van-swipe-item>
       </van-swipe>
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <van-swipe-cell v-for="item in list" :key="item" right-width='100%'>
+        <van-swipe-cell v-for="item in list" :key="item" right-width="100%">
           <van-cell :title="item" value="1小时前" label="描述信息" @click="handlerItem(item)">
             <template #icon>
               <van-icon
@@ -17,8 +17,8 @@
             </template>
           </van-cell>
           <template #right>
-            <van-button square color="#404040" text="标为已读" @click="handleRead(item)"/>
-            <van-button square type="danger" text="删除" @click="handleDel(item)"/>
+            <van-button square color="#404040" text="标为已读" @click="handleRead(item)" />
+            <van-button square type="danger" text="删除" @click="handleDel(item)" />
           </template>
         </van-swipe-cell>
       </van-list>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { List, PullRefresh, Cell, Swipe, SwipeItem, Icon, Image, SwipeCell,Button } from 'vant'
+import { List, PullRefresh, Cell, Swipe, SwipeItem, Icon, Image, SwipeCell, Button } from 'vant'
 export default {
   data() {
     return {
@@ -47,7 +47,7 @@ export default {
     [PullRefresh.name]: PullRefresh,
     [Image.name]: Image,
     [SwipeCell.name]: SwipeCell,
-    [Button.name]: Button,
+    [Button.name]: Button
   },
   methods: {
     onLoad() {
@@ -76,14 +76,15 @@ export default {
       this.loading = true
       this.onLoad()
     },
-    handleRead(item){
-      console.log('标为已读',item);
+    handleRead(item) {
+      console.log('标为已读', item)
     },
-    handleDel(item){
-      console.log('删除',item);
+    handleDel(item) {
+      console.log('删除', item)
     },
-    handlerItem(item){
-      console.log('打开',item);
+    handlerItem(item) {
+      console.log('打开', item)
+      this.$router.push('/task/visible?id=' + item)
     }
   }
 }
@@ -104,7 +105,7 @@ export default {
     background-color: #ffffff;
     height: 134px;
   }
-  /deep/ .van-button--square{
+  /deep/ .van-button--square {
     height: 100%;
   }
 }

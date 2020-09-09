@@ -44,25 +44,47 @@ const routes = [{
   },
   {
     path: '/task',
-    component: {
-      render: h => h('router-view')
-    },
+    component: ()=>import( /* webpackChunkName: "about" */ '../layer/TaskLayer'),
     children: [{
         path: '',
-        name:'Task',
+        name: 'Task',
         component: () => {
           return import( /* webpackChunkName: "about" */ '../views/Task')
         },
       },
       {
         path: 'sell',
-        name:'Sell',
-        component: () => import( /* webpackChunkName: "about" */ '../views/Task/sell')
+        name: 'Sell',
+        component: () => import( /* webpackChunkName: "about" */ '../views/Task/sell'),
+        meta:{
+          keepAlive:true
+        },
       },
       {
         path: 'select',
-        name:'Select',
+        name: 'Select',
         component: () => import( /* webpackChunkName: "about" */ '../views/Task/select')
+      },
+      {
+        path: 'visible',
+        name: 'Visible',
+        component: () => import( /* webpackChunkName: "about" */ '../views/Task/visible')
+      },
+      {
+        path:'list',
+        name: 'List',
+        component: () => import( /* webpackChunkName: "about" */ '../views/Task/list'),
+        meta:{
+          keepAlive:true
+        },
+      },
+      {
+        path: 'follow',
+        name: 'Follow',
+        component: () => import( /* webpackChunkName: "about" */ '../views/Task/follow'),
+        meta:{
+          keepAlive:true
+        },
       },
     ]
   },

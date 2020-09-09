@@ -115,7 +115,7 @@ export default {
         {
           id: 8,
           icon: 'https://api.gdweizhou.com/upload/news/2020/9/3/20200903205149aeLp.png',
-          text: '任务布置',
+          text: '任务管理',
           url: '',
           color: '#C45ADB'
         }
@@ -183,6 +183,14 @@ export default {
   methods:{
     handleGrid(obj){
       console.log('点击了'+obj.text);
+      if(obj.text=='任务布置'){
+        this.$router.push('/task/sell')
+      }else if(obj.text=='任务管理'){
+        this.$router.push('/task/list')
+      }
+      else if(obj.text=='个人日程'){
+        this.$router.push('/task/follow')
+      }
     }
   }
 }
